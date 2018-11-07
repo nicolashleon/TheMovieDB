@@ -22,9 +22,16 @@ android {
         enabled = true
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "POSTER_BASE_URL", "\"http://image.tmdb.org/t/p/w154//\""
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "POSTER_BASE_URL", "\"http://image.tmdb.org/t/p/w154//\""
         }
     }
 }
