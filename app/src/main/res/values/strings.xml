@@ -4,4 +4,5 @@
     <string name="txt_popularity">%1$d%\nPopularity</string>
     <string name="txt_votes">%1$d\nVotes</string>
     <string name="txt_score">%1$d/10\nScore</string>
+    <string name="error_fetch_movies">Error fetching the movies</string>
 </resources>
