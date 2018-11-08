@@ -1,25 +1,26 @@
 package com.example.moviedb.repositories
 
-import com.example.moviedb.BuildConfig
-import com.example.moviedb.services.MovieService
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.moviedb.models.Movie
+import com.example.moviedb.sources.LocalMovieSource
+import com.example.moviedb.sources.RemoteMovieSource
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-class MovieRepository {
+class MovieRepository(private val localMovieSource: LocalMovieSource,
+                      private val remoteMovieSource: RemoteMovieSource) {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.API_BASE_URL_V3)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
-    private val service = retrofit.create(MovieService::class.java)
-
-    fun getMovie(id: Int) {
-        
-    }
-
-    fun getPopular() {
-
+    fun getPopular(): Observable<Movie> {
+        return remoteMovieSource.getPopularMovies()
+                .doOnEach {
+                    val value = it.value
+                    if (!it.isOnError && value != null) {
+                        localMovieSource.saveMovie(value)
+                    }
+                }
+                .doOnError { localMovieSource.getPopularMovies() }
+                .switchIfEmpty(Observable.error<Movie>(Exception("Database is empty")))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }
