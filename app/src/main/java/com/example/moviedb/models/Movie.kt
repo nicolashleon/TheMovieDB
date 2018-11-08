@@ -1,18 +1,16 @@
 package com.example.moviedb.models
 
-data class Movie(
-    val adult: Boolean,
-    val backdrop_path: String?,
-    val genre_ids: List<Int>,
-    val id: Int,
-    val original_language: String,
-    val original_title: String,
-    val overview: String,
-    val popularity: Double,
-    val poster_path: String?,
-    val release_date: String,
-    val title: String,
-    val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
-)
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+
+open class Movie(@PrimaryKey var id: Int = 0,
+                 var adult: Boolean = false,
+                 var backdropPath: String? = null,
+                 var description: String = "",
+                 var popularity: Double = 0.0,
+                 var posterPath: String? = null,
+                 var releaseDate: String = "",
+                 var title: String = "",
+                 var video: Boolean = false,
+                 var score: Double = 0.0,
+                 var votes: Int = 0) : RealmObject()
