@@ -13,4 +13,8 @@ open class Movie(@PrimaryKey var id: Int = 0,
                  var title: String = "",
                  var video: Boolean = false,
                  var score: Double = 0.0,
-                 var votes: Int = 0) : RealmObject()
+                 var votes: Int = 0) : RealmObject(), DelegateUIModel {
+
+    override val viewType: Int
+        get() = DelegateUIModel.MOVIE_ITEM
+}
