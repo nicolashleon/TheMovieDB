@@ -5,15 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import com.example.moviedb.R
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
-        fun getIntent(context: Context): Intent {
-            return Intent(context, MovieDetailActivity::class.java)
+        private const val MOVIE_ID = "MOVIE_ID"
+        fun getIntent(context: Context, movieId: Int): Intent {
+            return Intent(context, MovieDetailActivity::class.java).apply {
+                putExtra(MOVIE_ID, movieId)
+            }
         }
     }
 

@@ -24,18 +24,18 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/3/\""
-            buildConfigField "String", "POSTER_BASE_URL", "\"http://image.tmdb.org/t/p/w154//\""
+            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
             //TODO replace the API KEY with the one issued from TMDB
-            buildConfigField "String", "API_KEY", "\"API_KEY\""
+            buildConfigField "String", "API_KEY", "\"f19d91a5929903ec923e8d9f11ae024d\""
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/3/\""
-            buildConfigField "String", "POSTER_BASE_URL", "\"http://image.tmdb.org/t/p/w154//\""
+            buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
             //TODO replace the API KEY with the one issued from TMDB
-            buildConfigField "String", "API_KEY", "\"API_KEY\""
+            buildConfigField "String", "API_KEY", "\"f19d91a5929903ec923e8d9f11ae024d\""
         }
     }
     compileOptions {
@@ -58,6 +58,7 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
