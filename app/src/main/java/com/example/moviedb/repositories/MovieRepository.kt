@@ -12,15 +12,13 @@ class MovieRepository(private val localMovieSource: LocalMovieSource,
 
     fun getPopular(): Observable<Movie> {
         return remoteMovieSource.getPopularMovies()
-                .doOnEach {
-                    val value = it.value
-                    if (!it.isOnError && value != null) {
-                        localMovieSource.saveMovie(value)
-                    }
+                .flatMap {
+                    localMovieSource.saveMovie(it)
                 }
-                .doOnError { localMovieSource.getPopularMovies() }
+                .onErrorResumeNext { t: Throwable -> localMovieSource.getPopularMovies() }
                 .switchIfEmpty(Observable.error<Movie>(Exception("Database is empty")))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
 }

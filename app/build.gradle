@@ -27,7 +27,7 @@ android {
             buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
             buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
             //TODO replace the API KEY with the one issued from TMDB
-            buildConfigField "String", "API_KEY", "\"f19d91a5929903ec923e8d9f11ae024d\""
+            buildConfigField "String", "API_KEY", "\"API_KEY\""
         }
         release {
             minifyEnabled true
@@ -35,7 +35,7 @@ android {
             buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
             buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
             //TODO replace the API KEY with the one issued from TMDB
-            buildConfigField "String", "API_KEY", "\"f19d91a5929903ec923e8d9f11ae024d\""
+            buildConfigField "String", "API_KEY", "\"API_KEY\""
         }
     }
     compileOptions {
