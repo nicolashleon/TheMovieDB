@@ -20,9 +20,7 @@ class MovieDBApplication : Application() {
 
     private val appModule by lazy {
         module {
-            single { Realm.init(this@MovieDBApplication) }
-            single { Realm.getDefaultInstance() }
-            single { LocalMovieSource(get()) }
+            single { LocalMovieSource() }
             single {
                 val httpLoggingInterceptor = HttpLoggingInterceptor()
                 httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
