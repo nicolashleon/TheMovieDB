@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">MovieDB</string>
     <string name="title_description">Description</string>
-    <string name="txt_popularity">%1$d%\nPopularity</string>
-    <string name="txt_votes">%1$d\nVotes</string>
-    <string name="txt_score">%1$d/10\nScore</string>
+    <string name="txt_popularity">%1$s\nPopularity</string>
+    <string name="txt_votes">%1$s\nVotes</string>
+    <string name="txt_score">%1$s/10\nScore</string>
     <string name="error_fetch_movies">Error fetching the movies</string>
+    <string name="error_fetch_movie">Error fetching the movie details</string>
 </resources>
