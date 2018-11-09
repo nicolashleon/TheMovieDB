@@ -6,4 +6,5 @@ import io.reactivex.Observable
 
 class MovieViewModel(private val repository: MovieRepository) {
     fun getPopularMovies(): Observable<Movie> = repository.getPopular()
+    fun getMovie(movieId: Int): Observable<Movie> = repository.getMovie(movieId)
 }

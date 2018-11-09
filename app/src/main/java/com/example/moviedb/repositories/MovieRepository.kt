@@ -21,4 +21,8 @@ class MovieRepository(private val localMovieSource: LocalMovieSource,
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getMovie(movieId: Int): Observable<Movie> {
+        return localMovieSource.getMovie(movieId)
+    }
+
 }

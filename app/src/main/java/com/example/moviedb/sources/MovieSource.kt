@@ -6,4 +6,5 @@ import io.reactivex.Observable
 interface MovieSource {
     fun getPopularMovies(): Observable<Movie>
     fun saveMovie(movie: Movie): Observable<Movie>
+    fun getMovie(movieId: Int): Observable<Movie>
 }

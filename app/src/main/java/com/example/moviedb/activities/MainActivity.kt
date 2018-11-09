@@ -1,7 +1,6 @@
 package com.example.moviedb.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedb.MovieItemDecorator
@@ -13,16 +12,10 @@ import com.example.moviedb.models.GenericUIModel
 import com.example.moviedb.models.Movie
 import com.example.moviedb.repositories.MovieRepository
 import com.example.moviedb.viewmodels.MovieViewModel
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickedListener {
-
-    private val movieRepository: MovieRepository by inject()
-
-    private var disposables: CompositeDisposable = CompositeDisposable()
+class MainActivity : BaseActivity(), MovieAdapter.OnMovieClickedListener {
 
     private val movieAdapter = MovieAdapter(this)
 
@@ -65,17 +58,6 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickedListener {
         }))
     }
 
-    override fun onPause() {
-        super.onPause()
-        disposables.dispose()
-    }
-
-    private fun addDisposable(disposable: Disposable) {
-        if (disposables.isDisposed) {
-            disposables = CompositeDisposable()
-        }
-        disposables.add(disposable)
-    }
 
     override fun onMovieClicked(m: Movie) {
         startActivity(MovieDetailActivity.getIntent(this, m.id))

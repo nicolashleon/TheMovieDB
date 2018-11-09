@@ -12,14 +12,18 @@ class RemoteMovieSource(private val movieService: MovieService) : MovieSource {
         return movieService.getPopular()
                 .flatMapIterable { t: Response<com.example.moviedb.networking.models.Movie> -> t.results }
                 .map { t: com.example.moviedb.networking.models.Movie ->
-                    Movie(t.id, t.adult, BuildConfig.POSTER_BASE_URL + t.backdropPath,
-                            t.overview, t.popularity,
-                            BuildConfig.POSTER_BASE_URL + t.posterPath, t.releaseDate,
-                            t.title, t.video, t.voteAverage, t.voteCount)
+                    Movie(id = t.id, adult = t.adult, backdropPath = BuildConfig.BIG_POSTER_BASE_URL + t.backdropPath,
+                            description = t.overview, popularity = t.popularity,
+                            posterPath = BuildConfig.POSTER_BASE_URL + t.posterPath, releaseDate = t.releaseDate,
+                            title = t.title, video = t.video, score = t.voteAverage, votes = t.voteCount)
                 }
     }
 
     override fun saveMovie(movie: Movie): Observable<Movie> {
+        throw UnsupportedOperationException("TMDB API does not support this operation")
+    }
+
+    override fun getMovie(movieId: Int): Observable<Movie> {
         throw UnsupportedOperationException("TMDB API does not support this operation")
     }
 }

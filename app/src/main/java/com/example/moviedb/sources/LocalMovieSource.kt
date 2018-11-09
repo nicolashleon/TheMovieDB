@@ -28,13 +28,36 @@ class LocalMovieSource : MovieSource {
             val realm = Realm.getDefaultInstance()
             try {
                 realm.beginTransaction()
-                emitter.onNext(realm.copyToRealmOrUpdate(movie))
+                emitter.onNext(realm.copyFromRealm(realm.copyToRealmOrUpdate(movie)))
             } catch (e: java.lang.IllegalStateException) {
                 emitter.onError(e)
             } finally {
                 realm.commitTransaction()
                 realm.close()
                 emitter.onComplete()
+            }
+        }
+    }
+
+    override fun getMovie(movieId: Int): Observable<Movie> {
+        return Observable.create<Movie> { emitter: ObservableEmitter<Movie> ->
+            val realm = Realm.getDefaultInstance()
+            try {
+                val result = realm.where(Movie::class.java).equalTo("id", movieId)
+                val movie = result.findFirst()
+                if (movie == null) {
+                    emitter.onComplete()
+                } else {
+                    emitter.onNext(realm.copyFromRealm(movie))
+                }
+
+            } catch (e: java.lang.IllegalStateException) {
+                emitter.onError(e)
+            } finally {
+                if (!emitter.isDisposed) {
+                    emitter.onComplete()
+                }
+                realm.close()
             }
         }
     }

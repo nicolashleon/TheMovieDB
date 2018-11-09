@@ -26,6 +26,7 @@ android {
             minifyEnabled false
             buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
             buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
+            buildConfigField "String", "BIG_POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w780//\""
             //TODO replace the API KEY with the one issued from TMDB
             buildConfigField "String", "API_KEY", "\"API_KEY\""
         }
@@ -34,6 +35,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL_V3", "\"https://api.themoviedb.org/\""
             buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w154//\""
+            buildConfigField "String", "BIG_POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w780//\""
             //TODO replace the API KEY with the one issued from TMDB
             buildConfigField "String", "API_KEY", "\"API_KEY\""
         }
