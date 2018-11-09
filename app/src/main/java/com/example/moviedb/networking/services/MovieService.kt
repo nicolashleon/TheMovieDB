@@ -6,6 +6,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 
 interface MovieService {
-    @GET("/movie/popular")
+    @GET("/3/movie/popular")
     fun getPopular(): Observable<Response<Movie>>
 }

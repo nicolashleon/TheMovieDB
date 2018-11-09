@@ -16,10 +16,24 @@ import com.squareup.picasso.Picasso
 
 class MovieDelegateAdapter : DelegateAdapter {
 
+    companion object {
+        @BindingAdapter("bind_imageUrl")
+        @JvmStatic
+        fun loadImage(view: ImageView, imageUrl: String?) {
+            if (!imageUrl.isNullOrEmpty()) {
+                Picasso.get()
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_movies_24px)
+                        .error(R.drawable.ic_movies_24px)
+                        .into(view)
+            }
+        }
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-                layoutInflater, R.layout.item_movie, parent, false)
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_movie, parent, false)
         return MovieViewHolder(viewDataBinding)
     }
 
@@ -30,17 +44,6 @@ class MovieDelegateAdapter : DelegateAdapter {
         }
     }
 
-    @BindingAdapter("bind_imageUrl")
-    fun loadImage(view: ImageView, imageUrl: String?) {
-        if (!imageUrl.isNullOrEmpty()) {
-            Picasso.Builder(view.context)
-                    .build()
-                    .load(imageUrl)
-                    .placeholder(R.drawable.ic_movies_24px)
-                    .error(R.drawable.ic_movies_24px)
-                    .into(view)
-        }
-    }
 
     inner class MovieViewHolder(val binding: ViewDataBinding) :
             RecyclerView.ViewHolder(binding.root)
