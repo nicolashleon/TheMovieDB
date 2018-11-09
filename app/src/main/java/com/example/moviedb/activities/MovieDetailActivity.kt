@@ -41,7 +41,7 @@ class MovieDetailActivity : BaseActivity() {
         @BindingAdapter("bind_votes")
         @JvmStatic
         fun loadVotes(view: TextView, votes: Int) {
-            val text = view.context.getString(R.string.txt_votes, votes)
+            val text = view.context.getString(R.string.txt_votes, votes.toString())
             view.text = text
         }
 
