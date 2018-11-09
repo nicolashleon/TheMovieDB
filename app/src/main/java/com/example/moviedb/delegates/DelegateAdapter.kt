@@ -8,10 +8,7 @@ import com.example.moviedb.models.DelegateUIModel
  * Code adapted from https://github.com/sockeqwe/AdapterDelegates
  * http://hannesdorfmann.com/android/adapter-delegates
  */
-interface DelegateAdapter<VH : RecyclerView.ViewHolder, UIModel : DelegateUIModel> {
-
-    fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH
-
-    fun onBindViewHolder(viewHolder: VH, uiModel: UIModel)
-
+interface DelegateAdapter {
+    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, delegateUIModel: DelegateUIModel)
+    fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 }

@@ -14,8 +14,8 @@ import com.example.moviedb.models.DelegateUIModel
  */
 abstract class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    protected var delegateAdapters = SparseArray<DelegateAdapter<RecyclerView.ViewHolder, DelegateUIModel>>()
-    protected var delegateUIModels: MutableList<DelegateUIModel> = ArrayList<DelegateUIModel>()
+    protected var delegateAdapters = SparseArray<DelegateAdapter>()
+    protected var delegateUIModels: MutableList<DelegateUIModel> = ArrayList()
 
     val isEmpty: Boolean
         get() = delegateUIModels.isEmpty()
@@ -38,7 +38,7 @@ abstract class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         delegateAdapter?.onBindViewHolder(holder, delegateUIModels[position])
     }
 
-    fun addDelegate(delegateAdapter: DelegateAdapter<RecyclerView.ViewHolder, DelegateUIModel>, viewType: Int) {
+    fun <T : DelegateAdapter> addDelegate(delegateAdapter: T, viewType: Int) {
         delegateAdapters.put(viewType, delegateAdapter)
     }
 
